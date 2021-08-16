@@ -1,0 +1,33 @@
+body{
+    width:100%;
+    height: 100%;
+    background-color: #F4F4FF;
+}
+.container{
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    background-color: #F4F4FF;
+}
+.logo{
+    width: 100%;
+    height: 100%;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.logo img{
+    width:40%;
+    height:40%;
+    margin-left: 30%;
+    margin-right: 30%;
+}
+.signupBox{
+    width: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
+}
+.signupBox div{
+    width: 100%;
+    align-items: center;
+    flex-direction: column;
+}
