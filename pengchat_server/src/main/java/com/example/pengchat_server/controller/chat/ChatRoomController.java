@@ -2,6 +2,7 @@ package com.example.pengchat_server.controller.chat;
 
 import com.example.pengchat_server.model.chat.ChatRoom;
 import com.example.pengchat_server.model.user.User;
+import com.example.pengchat_server.repo.chat.ChatRoomRepository;
 import com.example.pengchat_server.service.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -10,20 +11,31 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Controller
 @RequestMapping("/chat")
 public class ChatRoomController {
 
-    private final com.example.pengchat_server.repo.chat.ChatRoomRepository chatRoomRepository;
+    private final ChatRoomRepository chatRoomRepository;
+    private final JwtTokenProvider jwtTokenProvider;
 
-    // 채팅 리스트 화면
     @GetMapping("/room")
-    public String rooms(Model model) {
+    public String rooms(){
         return "/chat/room";
     }
-    // 모든 채팅방 목록 반환
+
     @GetMapping("/rooms")
+    @ResponseBody
+    public List<ChatRoom> room(){
+        List<ChatRoom> chatRooms = chatRoomRepository.findAllRoom();
+        chatRooms.stream().forEach(room -> room.setUserCount(chatRoomRepository.getUserCount(room.getRoomId())));
+        return chatRooms;
+    }
+
+    // 채팅방 생성
+    @PostMapping("/room")
     @ResponseBody
     public ChatRoom createRoom(@RequestParam String name){
         return chatRoomRepository.createChatRoom(name);
@@ -40,8 +52,6 @@ public class ChatRoomController {
     public ChatRoom roomInfo(@PathVariable String roomId){
         return chatRoomRepository.findRoomById(roomId);
     }
-
-    private final JwtTokenProvider jwtTokenProvider;
 
     @GetMapping("/user")
     @ResponseBody
