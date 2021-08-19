@@ -1,3 +1,5 @@
 spring:
   profiles:
     action: local
+  jwt:
+    secret: 4NG0!

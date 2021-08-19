@@ -1,4 +1,4 @@
-package com.example.pengchat_server.controller.chat;
+package com.example.pengchat_server.model.chat;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,6 +1,11 @@
 package com.example.pengchat_server.controller.chat;
 
+import com.example.pengchat_server.model.chat.ChatRoom;
+import com.example.pengchat_server.model.user.User;
+import com.example.pengchat_server.service.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +39,16 @@ public class ChatRoomController {
     @ResponseBody
     public ChatRoom roomInfo(@PathVariable String roomId){
         return chatRoomRepository.findRoomById(roomId);
+    }
+
+    private final JwtTokenProvider jwtTokenProvider;
+
+    @GetMapping("/user")
+    @ResponseBody
+    public User getUserInfo(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String userName = auth.getName();
+        return User.builder().userName(userName).token(jwtTokenProvider.generateToken(userName)).build();
     }
 
 }
