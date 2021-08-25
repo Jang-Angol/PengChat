@@ -3,10 +3,22 @@ package com.example.pengchat_server.model.user;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Getter
-@Setter
+@Builder
+@Entity(name="USER_TB")
 public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String userId;
     private String userPw;
     private String userName;
