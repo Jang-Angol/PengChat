@@ -3,7 +3,6 @@ package com.example.pengchat_server.model.user;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,9 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Getter
+@Setter
 @Builder
 @Entity(name="USER_TB")
-public class User {
+public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,16 +21,16 @@ public class User {
 
     private String userId;
     private String userPw;
+    private String salt;
     private String userName;
     private String userEmail;
-    private String token;
 
     @Builder
-    public User(String userId, String userPw, String userName, String userEmail, String token){
+    public UserEntity(String userId, String userPw, String salt, String userName, String userEmail){
         this.userId = userId;
         this.userPw = userPw;
+        this.salt = salt;
         this.userName = userName;
         this.userEmail = userEmail;
-        this.token = token;
     }
 }

@@ -1,7 +1,7 @@
 package com.example.pengchat_server.controller.chat;
 
 import com.example.pengchat_server.model.chat.ChatRoom;
-import com.example.pengchat_server.model.user.User;
+import com.example.pengchat_server.model.user.UserEntity;
 import com.example.pengchat_server.repo.chat.ChatRoomRepository;
 import com.example.pengchat_server.service.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
@@ -55,10 +55,10 @@ public class ChatRoomController {
 
     @GetMapping("/user")
     @ResponseBody
-    public User getUserInfo(){
+    public UserEntity getUserInfo(){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String userName = auth.getName();
-        return User.builder().userName(userName).token(jwtTokenProvider.generateToken(userName)).build();
+        return UserEntity.builder().userName(userName).token(jwtTokenProvider.generateToken(userName)).build();
     }
 
 }
