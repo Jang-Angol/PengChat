@@ -53,12 +53,15 @@ public class ChatRoomController {
         return chatRoomRepository.findRoomById(roomId);
     }
 
+    /*
     @GetMapping("/user")
     @ResponseBody
     public UserEntity getUserInfo(){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String userName = auth.getName();
-        return UserEntity.builder().userName(userName).token(jwtTokenProvider.generateToken(userName)).build();
+        return UserEntity.builder().userName(userName).build();
     }
+    (/
+     */
 
 }

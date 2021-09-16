@@ -8,7 +8,6 @@ import javax.persistence.*;
 
 @Getter
 @Setter
-@Builder
 @Entity(name="USER_TB")
 public class UserEntity {
 
