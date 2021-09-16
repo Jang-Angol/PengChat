@@ -4,10 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -19,11 +16,21 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String userId;
+    @Column(nullable = false)
     private String userPw;
+    @Column(nullable = false)
     private String salt;
+    @Column(nullable = false)
     private String userName;
+    @Column(nullable = false)
     private String userEmail;
+
+    private String role;
+    private String status;
+
+
 
     @Builder
     public UserEntity(String userId, String userPw, String salt, String userName, String userEmail){
@@ -32,5 +39,7 @@ public class UserEntity {
         this.salt = salt;
         this.userName = userName;
         this.userEmail = userEmail;
+        this.role = Role.MEMBER.getValue();
+        this.status = Status.NONBLOCKED.getValue();
     }
 }

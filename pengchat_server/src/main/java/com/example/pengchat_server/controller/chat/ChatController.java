@@ -24,7 +24,7 @@ public class ChatController {
     * */
    @MessageMapping("/chat/message")
     public void message(ChatMessage message, @Header("token") String token){
-       String userName = jwtTokenProvider.getUserNameFromJwt(token);
+       String userName = jwtTokenProvider.getUserIdFromJwt(token);
         // 로그인 회원 정보로 대화명 설정
        message.setSender(userName);
        // 채팅방 인원 수 세팅

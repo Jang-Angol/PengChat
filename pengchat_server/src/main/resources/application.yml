@@ -5,7 +5,7 @@ spring:
   profiles:
     action: local
   jwt:
-    secret: 4NG0!
+    secret: 4NG0!.N2aR.S0luT!oN@gmail.com
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/PengChat_DB?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC

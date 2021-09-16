@@ -12,27 +12,33 @@ import java.util.Optional;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
+    private JwtTokenProvider jwtTokenProvider;
 
     // 로그인
     public String login(String peng_id, String peng_pw){
-        Optional<UserEntity> user = findByuserId(peng_id);
-        if (user.isPresent()){
+        UserEntity user = findByUserId(peng_id);
+        if (user != null){
             // bcrypt hash
-            String password = BCrypt.hashpw(peng_pw,user.get().getSalt());
-            if(password.equals(user.get().getUserPw())){
-                // 세션 생성
+            String password = BCrypt.hashpw(peng_pw,user.getSalt());
+            if(password.equals(user.getUserPw())){
+                // jwt Token 생성
+                return jwtTokenProvider.generateToken(user.getUserName());
             }
         }
         return null;
     }
     // 회원가입
     public Boolean signup(String peng_id, String peng_pw, String peng_name, String peng_email){
-        UserEntity user = new UserEntity(peng_id,peng_pw,BCrypt.gensalt(),peng_name,peng_email);
+        // salt 생성
+        String salt = BCrypt.gensalt();
+        // password hash
+        String password = BCrypt.hashpw(peng_pw,salt);
+        UserEntity user = new UserEntity(peng_id,password,salt,peng_name,peng_email);
         save(user);
         return true;
     }
 
-    public Optional<UserEntity> findByuserId(String userId){
+    public UserEntity findByUserId(String userId){
         return userRepository.findByUserId(userId);
     }
 
@@ -40,13 +46,13 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public void updateByuserId(String userId, UserEntity user){
-        Optional<UserEntity> e = userRepository.findByUserId(userId);
+    public void updateByUserId(String userId, UserEntity user){
+        UserEntity e = userRepository.findByUserId(userId);
 
-        if (e.isPresent()){
-            e.get().setUserPw(user.getUserPw());
-            e.get().setUserName(user.getUserName());
-            e.get().setUserEmail(user.getUserEmail());
+        if (e != null){
+            e.setUserPw(user.getUserPw());
+            e.setUserName(user.getUserName());
+            e.setUserEmail(user.getUserEmail());
             userRepository.save(user);
         }
     }
