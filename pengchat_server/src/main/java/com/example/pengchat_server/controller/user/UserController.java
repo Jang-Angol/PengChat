@@ -25,7 +25,7 @@ public class UserController {
 
     // 로그인 요청 처리
     @PostMapping("/login")
-    public String login(@RequestParam String peng_id, String peng_pw, HttpServletResponse response){
+    public String login(@RequestParam String peng_id, @RequestParam String peng_pw, HttpServletResponse response){
 
        String token = userService.login(peng_id,peng_pw);
        response.setHeader("X-AUTH-TOKEN",token);
@@ -40,7 +40,7 @@ public class UserController {
 
     // 회원 가입 요청 처리
     @PostMapping("/signup")
-    public Boolean signUp(@RequestParam String peng_id, String peng_pw, String peng_name, String peng_email){
+    public Boolean signUp(@RequestParam String peng_id,@RequestParam String peng_pw,@RequestParam String peng_name,@RequestParam String peng_email){
         return userService.signup(peng_id, peng_pw, peng_name, peng_email);
     }
 
