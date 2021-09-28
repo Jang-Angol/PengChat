@@ -34,6 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         In memory에 계정이 생성되어있다는 과정
         추후에 Repository를 생성하여 DB 데이터를 읽어 올 수 있도록 설정
     * */
+    /*
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{
         auth.inMemoryAuthentication()
@@ -41,4 +42,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .password("blablabla")
                 .roles("USER");
     }
+    */
 }
