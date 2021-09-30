@@ -3,6 +3,7 @@ package com.example.pengchat_server.config;
 import com.example.pengchat_server.config.filter.JwtAuthenticationFilter;
 import com.example.pengchat_server.service.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -14,6 +15,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
+
+    @Bean
+    public JwtAuthenticationFilter jwtAuthenticationFilter(JwtTokenProvider jwtTokenProvider){
+        return new JwtAuthenticationFilter(jwtTokenProvider);
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -28,7 +34,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         .antMatchers("/chat/**").hasRole("USER") // chat으로 시작하는 리소스에 대한 접근 권한 설정
                         .anyRequest().permitAll() // 나머지 리소스에 대한 접근 설정
                 .and()
-                    .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider));
+                    .addFilterBefore(jwtAuthenticationFilter(jwtTokenProvider),
+                            JwtAuthenticationFilter.class);
     }
     /*
         In memory에 계정이 생성되어있다는 과정
