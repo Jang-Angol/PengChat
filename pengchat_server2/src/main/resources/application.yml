@@ -1,0 +1,17 @@
+server:
+  address: localhost
+  port: 8080
+spring:
+  profiles:
+    action: local
+  jwt:
+    secret: 4NG0!.N2aR.S0luT!oN@gmail.com
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/PengChat_DB?useSSL=false&allowPublicKeyRetrieval=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: jang5211
+  jpa:
+    database: mysql
+    generate-ddl: true
+    show-sql: true

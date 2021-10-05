@@ -1,32 +1,48 @@
 package com.example.pengchat_server2.controller;
 
-import com.example.pengchat_server2.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import com.example.pengchat_server2.config.security.JwtTokenProvider;
+import com.example.pengchat_server2.model.User;
+import com.example.pengchat_server2.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+import java.util.Collections;
+import java.util.Map;
+
+@RequiredArgsConstructor
+@RestController
 public class UserController {
 
-    private final UserService userService;
+    private final PasswordEncoder passwordEncoder;
+    private final JwtTokenProvider jwtTokenProvider;
+    private final UserRepository userRepository;
 
-    @Autowired
-    public UserController(UserService userService){
-        this.userService = userService;
+    // 회원가입
+    @PostMapping("/signup")
+    public Long signup(@RequestBody Map<String, String> user){
+        return userRepository.save(User.builder()
+                .userId(user.get("peng_id"))
+                .userPw(passwordEncoder.encode(user.get("peng_pw")))
+                .userName(user.get("peng_name"))
+                .userEmail(user.get("peng_email"))
+                .roles(Collections.singletonList("ROLE_USER"))
+                .build()).getId();
+
     }
 
     // 로그인
-    @PostMapping("/user/login")
-    public String login(){
-        return "login";
+    @PostMapping("/login")
+    public String login(@RequestBody Map<String, String> user){
+        User member = userRepository.findByUserId(user.get("peng_id"))
+                .orElseThrow(() -> new IllegalArgumentException("가입되지 않은 유저입니다."));
+        if (!passwordEncoder.matches(user.get("peng_pw"),member.getUserPw())){
+            throw new IllegalArgumentException("잘못된 비밀번호입니다.");
+        }
+        return jwtTokenProvider.createToken(member.getUserId(), member.getRoles());
     }
 
-    // 회원가입
-    @PostMapping("/user/signup")
-    public String signup(){
-        return "signup";
-    }
-
-    //
 
 }
