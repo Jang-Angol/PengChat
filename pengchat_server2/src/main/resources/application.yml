@@ -1,5 +1,4 @@
 server:
-  address: http://13.125.94.230
   port: 8080
 spring:
   datasource:
