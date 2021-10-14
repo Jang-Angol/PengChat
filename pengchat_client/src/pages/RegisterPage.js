@@ -4,7 +4,7 @@ import { Container } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 
-import "./SignUpPage.css";
+import "./RagisterPage.css";
 import { changeField, initializeForm, register } from "../modules/auth";
 import logoImg from "../assets/animal-kingdom.svg";
 import { CustomTextField, CustomButton } from "../assets/CustomMaterial";
