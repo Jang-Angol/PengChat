@@ -4,17 +4,23 @@ import { Container, Paper, IconButton, Icon } from "@material-ui/core";
 import "./LobbyPage.css";
 
 const LobbyPage = (props) => {
+  /*
   const chatRoomList = props.chatRooms.map((chatRoom) => {
     <chatRoom name={chatRoom.name} number={chatRoom.userCount} max={chatRoom.maxCount} />
   });
-
+  */
   return (
+    <Container className="container" maxWidth="sm">
+      testtest
+    </Container>
+    /*
   <Container className="container" maxWidth="sm">
     <chatRoomList />
     <IconButton className="createChatRoom">
       <Icon style={{color:"#92BEFF"}}>add_circle</Icon>
     </IconButton>
   </Container>
+  */
   );
 };
 
