@@ -8,12 +8,8 @@
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
-<<<<<<< HEAD
-    "immer": "^9.0.6",
-=======
     "axios": "^0.22.0",
     "immer": "^8.0.1",
->>>>>>> a93f2d20a822e2fcc206a5be4beb0e872b0e97aa
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.4",
