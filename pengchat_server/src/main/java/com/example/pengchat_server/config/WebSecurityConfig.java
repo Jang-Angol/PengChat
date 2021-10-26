@@ -32,10 +32,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                     .authorizeRequests()
                         .antMatchers("/chat/**").hasRole("USER") // chat으로 시작하는 리소스에 대한 접근 권한 설정
-                        .anyRequest().permitAll() // 나머지 리소스에 대한 접근 설정
+                        .anyRequest().permitAll(); // 나머지 리소스에 대한 접근 설정
+                /*
                 .and()
                     .addFilterBefore(jwtAuthenticationFilter(jwtTokenProvider),
                             JwtAuthenticationFilter.class);
+
+                 */
     }
     /*
         In memory에 계정이 생성되어있다는 과정
