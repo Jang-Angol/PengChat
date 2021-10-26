@@ -46,7 +46,8 @@ export const login = createAction(LOGIN, ({ peng_id, peng_pw }) => ({
 const registerSaga = createRequestSaga(REGISTER, authAPI.register);
 const loginSaga = createRequestSaga(LOGIN, authAPI.login);
 export function* authSaga() {
-  yield takeLatest(REGISTER, registerSaga), yield takeLatest(LOGIN, loginSaga);
+  yield takeLatest(REGISTER, registerSaga);
+  yield takeLatest(LOGIN, loginSaga);
 }
 
 const initialState = {
