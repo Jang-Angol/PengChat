@@ -9,7 +9,7 @@ import { check } from "../modules/user";
 import logoImg from "../assets/animal-kingdom.svg";
 import { CustomTextField, CustomButton } from "../assets/CustomMaterial";
 
-const LoginPage = () => {
+const LoginPage = ({ history }) => {
   const dispatch = useDispatch();
   const { form, auth, authError, user } = useSelector(({ auth, user }) => ({
     form: auth.login,
@@ -103,4 +103,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default withRouter(LoginPage);

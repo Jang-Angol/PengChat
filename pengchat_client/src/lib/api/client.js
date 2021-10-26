@@ -2,11 +2,11 @@ import axios from "axios";
 
 const client = axios.create();
 
-/*
+
 //글로벌 설정 예시:
 
 // API 주소를 다른 곳으로 사용함
-client.defaults.baseURL = "";
+client.defaults.baseURL = "http://localhost:8080/";
 
 // 인터셉터 설정
 axios.interceptors.response.use(
@@ -19,6 +19,6 @@ axios.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-*/
+
 
 export default client;
