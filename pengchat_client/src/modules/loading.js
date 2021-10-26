@@ -18,7 +18,7 @@ export const finishLoading = createAction(
 
 const initialState = {};
 
-const loading = handleAction({
+const loading = handleActions({
   [START_LOADING]: (state, action) => ({
     ...state,
     [action.payload]: true,

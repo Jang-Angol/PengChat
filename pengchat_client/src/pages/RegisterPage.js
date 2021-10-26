@@ -33,7 +33,7 @@ const RegisterPage = ({ history }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     const { peng_id, peng_pw, peng_pw_check, peng_name, peng_email } = form;
-    if (peng_pw != peng_pw_check) {
+    if (peng_pw !== peng_pw_check) {
       // TO DO : 오류 처리
       return;
     }

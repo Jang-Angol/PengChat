@@ -62,7 +62,7 @@ const LoginPage = ({ history }) => {
   return (
     <Container className="container" maxWidth="sm">
       <div className="logo">
-        <img src={logoImg} />
+        <img src={logoImg} alt="logo" />
       </div>
       <form className="loginBox" onSubmit={onSubmit}>
         <div>
