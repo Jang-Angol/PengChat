@@ -5,7 +5,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/PengChat_DB?useSSL=false&allowPublicKeyRetrieval=true&characterEncoding=UTF-8&serverTimezone=UTC
     username: root
-    password: Angol5588!
+    password: jang5211
   jpa:
     database: mysql
     generate-ddl: true
