@@ -65,7 +65,7 @@ const RegisterPage = ({ history }) => {
     if (user) {
       console.log("check API 성공");
       console.log(user);
-      history.push("/");
+      history.push("/lobby");
     }
   }, [history, user]);
 

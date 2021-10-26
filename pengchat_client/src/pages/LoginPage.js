@@ -56,7 +56,7 @@ const LoginPage = ({ history }) => {
 
   useEffect(() => {
     if (user) {
-      history.push("/");
+      history.push("/lobby");
     }
   }, [history, user]);
 
