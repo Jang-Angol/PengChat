@@ -10,7 +10,7 @@ import logoImg from "../assets/animal-kingdom.svg";
 import { CustomTextField, CustomButton } from "../assets/CustomMaterial";
 import { check } from "../modules/user";
 
-const RegisterPage = () => {
+const RegisterPage = ({ history }) => {
   const dispatch = useDispatch();
   const { form, auth, authError } = useSelector(({ auth, user }) => ({
     form: auth.register,
@@ -64,8 +64,9 @@ const RegisterPage = () => {
     if (user) {
       console.log("check API 성공");
       console.log(user);
+      history.push("/");
     }
-  }, [user]);
+  }, [history, user]);
 
   return (
     <Container className="container" maxWidth="sm">
@@ -150,4 +151,4 @@ const RegisterPage = () => {
   );
 };
 
-export default RegisterPage;
+export default withRouter(RegisterPage);
