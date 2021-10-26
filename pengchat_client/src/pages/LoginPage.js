@@ -38,6 +38,7 @@ const LoginPage = ({ history }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     const { peng_id, peng_pw } = form;
+    console.log(form);
     dispatch(login({ peng_id, peng_pw }));
   };
 
@@ -91,13 +92,13 @@ const LoginPage = ({ history }) => {
         </CustomButton>
       </form>
       <CustomButton
-        href="/signup"
+        href="/register"
         variant="contained"
         style={{
           marginTop: 30,
         }}
       >
-        Sign UP
+        Register
       </CustomButton>
     </Container>
   );

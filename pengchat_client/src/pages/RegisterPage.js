@@ -33,6 +33,7 @@ const RegisterPage = ({ history }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     const { peng_id, peng_pw, peng_pw_check, peng_name, peng_email } = form;
+    console.log(form);
     if (peng_pw !== peng_pw_check) {
       // TO DO : 오류 처리
       return;
@@ -144,7 +145,7 @@ const RegisterPage = ({ history }) => {
             marginBottom: 50,
           }}
         >
-          Sign UP
+          REGISTER
         </CustomButton>
       </form>
     </Container>
