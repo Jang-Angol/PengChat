@@ -8,6 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collections;
@@ -34,11 +35,6 @@ public class UserController {
 
     }
 
-    @GetMapping("/test")
-    public String test(){
-        return "test";
-    }
-
     // 로그인
     @PostMapping("/login")
     public String login(@RequestBody Map<String, String> user){
@@ -47,10 +43,13 @@ public class UserController {
         if (!passwordEncoder.matches(user.get("peng_pw"),member.getUserPw())){
             throw new IllegalArgumentException("잘못된 비밀번호입니다.");
         }
-        String token = jwtTokenProvider.createToken(member.getUserId(), member.getRoles());
-        System.out.println("token",token);
-        return token;
+        return jwtTokenProvider.createToken(member.getUserId(), member.getRoles());
     }
 
-
+    @GetMapping("/user/check")
+    public String check(@RequestHeader Map<String, Object> headers){
+        String userId = jwtTokenProvider.getUserPk(headers.get("x-auth-token").toString().substring(7));
+        User user = userRepository.findByUserId(userId).orElseThrow(() -> new IllegalArgumentException("Invalid token"));;
+        return user.getUsername();
+    }
 }

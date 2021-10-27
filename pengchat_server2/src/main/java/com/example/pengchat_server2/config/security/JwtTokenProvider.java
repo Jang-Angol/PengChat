@@ -57,7 +57,7 @@ public class JwtTokenProvider {
 
     // Request Header에서 token값 추출 "X-AUTH-TOKEN" : "TOKEN값"
     public String resolveToken(HttpServletRequest request){
-        return request.getHeader("X-AUTH-TOKEN");
+        return request.getHeader("X-AUTH-TOKEN").substring(7);
     }
 
     // 토큰의 유효성과 만료일자 확인
