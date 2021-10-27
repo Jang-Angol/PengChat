@@ -16,7 +16,7 @@ const RegisterPage = ({ history }) => {
     form: auth.register,
     auth: auth.auth,
     authError: auth.authError,
-    user: user,
+    user: user.user,
   }));
 
   const onChange = (e) => {
@@ -36,6 +36,7 @@ const RegisterPage = ({ history }) => {
     console.log(form);
     if (peng_pw !== peng_pw_check) {
       // TO DO : 오류 처리
+      console.log("비밀번호가 일치하지 않습니다.")
       return;
     }
     dispatch(register({ peng_id, peng_pw, peng_name, peng_email }));
