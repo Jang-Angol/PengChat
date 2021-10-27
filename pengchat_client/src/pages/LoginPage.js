@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Container } from "@material-ui/core";
 import { withRouter } from "react-router-dom";
@@ -8,6 +8,8 @@ import { changeField, initializeForm, login } from "../modules/auth";
 import { check } from "../modules/user";
 import logoImg from "../assets/animal-kingdom.svg";
 import { CustomTextField, CustomButton } from "../assets/CustomMaterial";
+import { idValidation, pwValidation } from "../modules/Validation";
+import ErrorMessage from "../components/ErrorMessage";
 
 const LoginPage = ({ history }) => {
   const dispatch = useDispatch();
@@ -17,6 +19,8 @@ const LoginPage = ({ history }) => {
     authError: auth.authError,
     user: user.user,
   }));
+  const [error, setError] = useState(null);
+
   // 인풋 변경 이벤트 핸들러
   const onChange = (e) => {
     const { value, id } = e.target;
@@ -37,8 +41,18 @@ const LoginPage = ({ history }) => {
   // 폼 등록 이벤트 핸들러
   const onSubmit = (e) => {
     e.preventDefault();
+    setError(null);
     const { peng_id, peng_pw } = form;
     console.log(form);
+    if (peng_id === "" || peng_pw === "") {
+      setError("Please enter your ID and password.");
+      return;
+    } else {
+      if (!idValidation(peng_id) || !pwValidation(peng_pw)) {
+        setError("Invalid input");
+        return;
+      }
+    }
     dispatch(login({ peng_id, peng_pw }));
   };
 
@@ -46,6 +60,7 @@ const LoginPage = ({ history }) => {
     if (authError) {
       console.log("오류 발생");
       console.log(authError);
+      setError("Failed to Login");
       return;
     }
     if (auth) {
@@ -87,6 +102,7 @@ const LoginPage = ({ history }) => {
             }}
           />
         </div>
+        {error && <ErrorMessage>{error}</ErrorMessage>}
         <CustomButton variant="contained" type="submit">
           Login
         </CustomButton>

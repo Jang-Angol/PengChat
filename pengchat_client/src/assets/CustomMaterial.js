@@ -17,6 +17,12 @@ const CustomTextField = withStyles({
     "& input:invalid + fieldset": {
       borderColor: "red",
     },
+    "& .MuiFormHelperText-contained": {
+      marginTop: 0,
+      width: "100%",
+      backgroundColor: "#F4F4FF",
+      textAlign: "center",
+    },
   },
 })(TextField);
 

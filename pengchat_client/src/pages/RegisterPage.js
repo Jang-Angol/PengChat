@@ -9,6 +9,12 @@ import { changeField, initializeForm, register } from "../modules/auth";
 import logoImg from "../assets/animal-kingdom.svg";
 import { CustomTextField, CustomButton } from "../assets/CustomMaterial";
 import { check } from "../modules/user";
+import {
+  idValidation,
+  pwValidation,
+  nameValidation,
+  emailValidation,
+} from "../modules/Validation";
 
 const RegisterPage = ({ history }) => {
   const dispatch = useDispatch();
@@ -36,7 +42,7 @@ const RegisterPage = ({ history }) => {
     console.log(form);
     if (peng_pw !== peng_pw_check) {
       // TO DO : 오류 처리
-      console.log("비밀번호가 일치하지 않습니다.")
+      console.log("비밀번호가 일치하지 않습니다.");
       return;
     }
     dispatch(register({ peng_id, peng_pw, peng_name, peng_email }));
@@ -80,58 +86,85 @@ const RegisterPage = ({ history }) => {
       <form className="signupBox" onSubmit={onSubmit}>
         <div>
           <CustomTextField
-            required
             variant="outlined"
             id="peng_id"
             label="ID"
             onChange={onChange}
             value={form.peng_id}
+            error={form.peng_id !== "" && !idValidation(form.peng_id)}
+            helperText={
+              form.peng_id !== "" && !idValidation(form.peng_id)
+                ? "Alphabet or number of 4 to 12 letters"
+                : ""
+            }
           />
           <CustomTextField
-            required
             variant="outlined"
             id="peng_pw"
             label="PW"
             type="password"
             onChange={onChange}
             value={form.peng_pw}
+            error={form.peng_pw !== "" && !pwValidation(form.peng_pw)}
+            helperText={
+              form.peng_pw !== "" && !pwValidation(form.peng_pw)
+                ? "8 to 20 letters"
+                : ""
+            }
             style={{
               marginTop: 20,
               marginBottom: 20,
             }}
           />
           <CustomTextField
-            required
             variant="outlined"
             id="peng_pw_check"
             label="PW Check"
             type="password"
             onChange={onChange}
             value={form.peng_pw_check}
+            error={
+              form.peng_pw_check !== "" && form.peng_pw === form.peng_pw_check
+            }
+            helperText={
+              form.peng_pw_check !== "" && form.peng_pw === form.peng_pw_check
+                ? "Is not equal to PW"
+                : ""
+            }
             style={{
               marginTop: 20,
               marginBottom: 20,
             }}
           />
           <CustomTextField
-            required
             variant="outlined"
             id="peng_name"
             label="Name"
             onChange={onChange}
             value={form.peng_name}
+            error={form.peng_name !== "" && !nameValidation(form.peng_name)}
+            helperText={
+              form.peng_name !== "" && !nameValidation(form.peng_name)
+                ? "Korean or English"
+                : ""
+            }
             style={{
               marginTop: 20,
               marginBottom: 20,
             }}
           />
           <CustomTextField
-            required
             variant="outlined"
             id="peng_email"
             label="Email"
             onChange={onChange}
             value={form.peng_email}
+            error={form.peng_eamil !== "" && !emailValidation(form.peng_email)}
+            helperText={
+              form.peng_eamil !== "" && !emailValidation(form.peng_email)
+                ? "Invalid email form"
+                : ""
+            }
             style={{
               marginTop: 20,
               marginBottom: 20,
