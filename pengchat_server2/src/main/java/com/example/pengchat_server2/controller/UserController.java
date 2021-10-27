@@ -48,6 +48,7 @@ public class UserController {
             throw new IllegalArgumentException("잘못된 비밀번호입니다.");
         }
         String token = jwtTokenProvider.createToken(member.getUserId(), member.getRoles());
+        System.out.println("token",token);
         return token;
     }
 
