@@ -4,8 +4,9 @@ import { withStyles } from "@material-ui/core/styles";
 const CustomTextField = withStyles({
   root: {
     backgroundColor: "#FFFFFF",
-    paddingLeft: 20,
     "& .MuiOutlinedInput-root": {
+      paddingLeft: 15,
+      paddingRight: 15,
       "&:hover fieldset": {
         borderColor: "#92BEFF",
       },
