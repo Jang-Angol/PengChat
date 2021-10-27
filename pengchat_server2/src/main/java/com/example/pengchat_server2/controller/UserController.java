@@ -47,7 +47,8 @@ public class UserController {
         if (!passwordEncoder.matches(user.get("peng_pw"),member.getUserPw())){
             throw new IllegalArgumentException("잘못된 비밀번호입니다.");
         }
-        return jwtTokenProvider.createToken(member.getUserId(), member.getRoles());
+        String token = jwtTokenProvider.createToken(member.getUserId(), member.getRoles());
+        return token;
     }
 
 
