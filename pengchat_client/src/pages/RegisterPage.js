@@ -15,6 +15,7 @@ import {
   nameValidation,
   emailValidation,
 } from "../modules/Validation";
+import ErrorMessage from "../components/ErrorMessage";
 
 const RegisterPage = ({ history }) => {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ const RegisterPage = ({ history }) => {
     authError: auth.authError,
     user: user.user,
   }));
+  const [error, setError] = useState(null);
 
   const onChange = (e) => {
     const { value, id } = e.target;
@@ -40,9 +42,15 @@ const RegisterPage = ({ history }) => {
     e.preventDefault();
     const { peng_id, peng_pw, peng_pw_check, peng_name, peng_email } = form;
     console.log(form);
-    if (peng_pw !== peng_pw_check) {
+    if (
+      peng_pw !== peng_pw_check ||
+      !idValidation(peng_id) ||
+      !pwValidation(pwValidation) ||
+      !nameValidation(peng_name) ||
+      !emailValidation(peng_email)
+    ) {
       // TO DO : 오류 처리
-      console.log("비밀번호가 일치하지 않습니다.");
+      setError("Register Failed");
       return;
     }
     dispatch(register({ peng_id, peng_pw, peng_name, peng_email }));
@@ -56,12 +64,13 @@ const RegisterPage = ({ history }) => {
   // 회원가입 성공/실패 처리
   useEffect(() => {
     if (authError) {
-      console.log("오류 발생");
+      //console.log("오류 발생");
       console.log(authError);
+      setError("Register Failed");
       return;
     }
     if (auth) {
-      console.log("회원가입 성공");
+      //console.log("회원가입 성공");
       console.log(auth);
       dispatch(check());
     }
@@ -159,9 +168,9 @@ const RegisterPage = ({ history }) => {
             label="Email"
             onChange={onChange}
             value={form.peng_email}
-            error={form.peng_eamil !== "" && !emailValidation(form.peng_email)}
+            error={form.peng_email !== "" && !emailValidation(form.peng_email)}
             helperText={
-              form.peng_eamil !== "" && !emailValidation(form.peng_email)
+              form.peng_email !== "" && !emailValidation(form.peng_email)
                 ? "Invalid email form"
                 : ""
             }
@@ -170,6 +179,7 @@ const RegisterPage = ({ history }) => {
               marginBottom: 20,
             }}
           />
+          {error && <ErrorMessage>{error}</ErrorMessage>}
         </div>
         <CustomButton
           variant="contained"
