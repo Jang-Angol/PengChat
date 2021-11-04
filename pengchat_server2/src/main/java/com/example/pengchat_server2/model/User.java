@@ -6,6 +6,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity(name="USER_TB")
+@Entity(name = "USER_TB")
 public class User implements UserDetails {
 
     //ID 자동 생성 및 증가
@@ -23,15 +24,19 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Pattern(regexp = "^[A-Za-z0-9]{4,12}$")
     @Column(nullable = false, unique = true)
     private String userId;
 
+    @Pattern(regexp = "^[\\x00-\\x7F]{8,20}$")
     @Column(nullable = false)
     private String userPw;
 
+    @Pattern(regexp = "^[가-힣]+[가-힣\\s]*[가-힣]+$|^[a-zA-Z]+[a-zA-Z\\s]*[a-zA-Z]+$")
     @Column(nullable = false)
     private String userName;
 
+    @Pattern(regexp = "^[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*\\.[a-zA-Z]{2,3}$")
     @Column(nullable = false)
     private String userEmail;
 
@@ -52,27 +57,27 @@ public class User implements UserDetails {
     }
 
     @Override
-    public String getUsername(){
+    public String getUsername() {
         return userName;
     }
 
     @Override
-    public boolean isAccountNonExpired(){
+    public boolean isAccountNonExpired() {
         return true;
     }
 
     @Override
-    public boolean isAccountNonLocked(){
+    public boolean isAccountNonLocked() {
         return true;
     }
 
     @Override
-    public boolean isCredentialsNonExpired(){
+    public boolean isCredentialsNonExpired() {
         return true;
     }
 
     @Override
-    public boolean isEnabled(){
+    public boolean isEnabled() {
         return true;
     }
 }

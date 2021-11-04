@@ -27,12 +27,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception{
+    public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception{
+    protected void configure(HttpSecurity http) throws Exception {
         http
                 .httpBasic().disable() // rest api 만을 고려하여 기본설정 해제
                 .csrf().disable() // csrf 보안 토큰 disable
