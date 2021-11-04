@@ -8,7 +8,6 @@ import "./RegisterPage.css";
 import { changeField, initializeForm, register } from "../modules/auth";
 import logoImg from "../assets/animal-kingdom.svg";
 import { CustomTextField, CustomButton } from "../assets/CustomMaterial";
-import { check } from "../modules/user";
 import {
   idValidation,
   pwValidation,
@@ -44,7 +43,7 @@ const RegisterPage = ({ history }) => {
     if (
       peng_pw !== peng_pw_check ||
       !idValidation(peng_id) ||
-      !pwValidation(pwValidation) ||
+      !pwValidation(peng_pw) ||
       !nameValidation(peng_name) ||
       !emailValidation(peng_email)
     ) {
@@ -67,10 +66,15 @@ const RegisterPage = ({ history }) => {
       console.log(authError);
       setError("Register Failed");
       return;
-    } else {
+    } 
+  }, [history, authError, dispatch]);
+
+  useEffect(() => {
+    if (auth) {
+      console.log("회원가입 성공")
       history.push("/");
     }
-  }, [auth, authError, dispatch]);
+  }, [history, auth, dispatch]);
 
   return (
     <Container className="container" maxWidth="sm">
@@ -120,10 +124,10 @@ const RegisterPage = ({ history }) => {
             onChange={onChange}
             value={form.peng_pw_check}
             error={
-              form.peng_pw_check !== "" && form.peng_pw === form.peng_pw_check
+              form.peng_pw_check !== "" && form.peng_pw !== form.peng_pw_check
             }
             helperText={
-              form.peng_pw_check !== "" && form.peng_pw === form.peng_pw_check
+              form.peng_pw_check !== "" && form.peng_pw !== form.peng_pw_check
                 ? "Is not equal to PW"
                 : ""
             }
