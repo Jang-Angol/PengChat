@@ -19,11 +19,10 @@ import ErrorMessage from "../components/ErrorMessage";
 
 const RegisterPage = ({ history }) => {
   const dispatch = useDispatch();
-  const { form, auth, authError, user } = useSelector(({ auth, user }) => ({
+  const { form, auth, authError } = useSelector(({ auth }) => ({
     form: auth.register,
     auth: auth.auth,
     authError: auth.authError,
-    user: user.user,
   }));
   const [error, setError] = useState(null);
 
@@ -68,22 +67,10 @@ const RegisterPage = ({ history }) => {
       console.log(authError);
       setError("Register Failed");
       return;
-    }
-    if (auth) {
-      //console.log("회원가입 성공");
-      console.log(auth);
-      dispatch(check());
+    } else {
+      history.push("/");
     }
   }, [auth, authError, dispatch]);
-
-  // user값이 잘 생성되었는지 확인
-  useEffect(() => {
-    if (user) {
-      console.log("check API 성공");
-      console.log(user);
-      history.push("/lobby");
-    }
-  }, [history, user]);
 
   return (
     <Container className="container" maxWidth="sm">

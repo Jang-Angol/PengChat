@@ -78,10 +78,9 @@ const auth = handleActions(
       authError: null,
     }),
     // 회원가입 성공
-    [REGISTER_SUCCESS]: (state, { payload: auth }) => ({
+    [REGISTER_SUCCESS]: (state) => ({
       ...state,
       authError: null,
-      auth,
     }),
     // 회원가입 실패
     [REGISTER_FAILURE]: (state, { payload: error }) => ({

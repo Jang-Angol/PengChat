@@ -13,7 +13,7 @@ import ErrorMessage from "../components/ErrorMessage";
 
 const LoginPage = ({ history }) => {
   const dispatch = useDispatch();
-  const { form, auth, authError, user } = useSelector(({ auth, user }) => ({
+  const { form, auth, authError } = useSelector(({ auth, user }) => ({
     form: auth.login,
     auth: auth.auth,
     authError: auth.authError,
@@ -43,7 +43,6 @@ const LoginPage = ({ history }) => {
     e.preventDefault();
     setError(null);
     const { peng_id, peng_pw } = form;
-    console.log(form);
     if (peng_id === "" || peng_pw === "") {
       setError("Please enter your ID and password.");
       return;
