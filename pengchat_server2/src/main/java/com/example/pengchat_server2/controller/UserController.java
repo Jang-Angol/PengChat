@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 @RequiredArgsConstructor
@@ -47,9 +48,15 @@ public class UserController {
     }
 
     @GetMapping("/user/check")
-    public String check(@RequestHeader Map<String, Object> headers){
+    public HashMap<String, String> check(@RequestHeader Map<String, Object> headers){
         String userId = jwtTokenProvider.getUserPk(headers.get("x-auth-token").toString().substring(7));
-        User user = userRepository.findByUserId(userId).orElseThrow(() -> new IllegalArgumentException("Invalid token"));;
-        return user.getUsername();
+        User user = userRepository.findByUserId(userId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid token"));
+        HashMap<String, String> userInfo = new HashMap<>();
+        userInfo.put("peng_id",user.getUserId());
+        userInfo.put("peng_name",user.getUsername());
+        userInfo.put("peng_email",user.getUserEmail());
+
+        return userInfo;
     }
 }

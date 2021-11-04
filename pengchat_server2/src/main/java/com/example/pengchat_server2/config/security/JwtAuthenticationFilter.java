@@ -19,10 +19,13 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException{
-        System.out.println(request);
+        HttpServletRequest req = (HttpServletRequest) request;
+        String token = null;
         // Header에서 JWT 토큰 추출
-        String token = jwtTokenProvider.resolveToken((HttpServletRequest) request);
-        System.out.println(jwtTokenProvider.validateToken(token));
+        if(!req.getHeader("X-AUTH-TOKEN").isEmpty()){
+            token = jwtTokenProvider.resolveToken(req);
+            System.out.println(jwtTokenProvider.validateToken(token));
+        }
         // 토큰 유효성 확인
         if (token != null && jwtTokenProvider.validateToken(token)){
             // 토큰으로부터 유저 정보 추출
