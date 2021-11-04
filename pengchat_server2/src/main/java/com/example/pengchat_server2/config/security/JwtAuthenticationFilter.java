@@ -22,7 +22,7 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
         HttpServletRequest req = (HttpServletRequest) request;
         String token = null;
         // Header에서 JWT 토큰 추출
-        if(!req.getHeader("X-AUTH-TOKEN").isEmpty()){
+        if(req.getHeader("X-AUTH-TOKEN")!=null){
             token = jwtTokenProvider.resolveToken(req);
             System.out.println(jwtTokenProvider.validateToken(token));
         }
