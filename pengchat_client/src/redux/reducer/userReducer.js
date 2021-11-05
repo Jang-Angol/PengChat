@@ -1,10 +1,10 @@
 import { createAction, handleActions } from "redux-actions";
 import { takeLatest } from "redux-saga/effects";
 
-import * as authAPI from "../lib/api/auth";
+import * as authAPI from "../../lib/api/auth";
 import createRequestSaga, {
   createRequestActionTypes,
-} from "../lib/createRequestSaga";
+} from "../saga/createRequestSaga";
 
 const TEMP_SET_USER = "user/TEMP_SET_USER"; // 새로고침 이후 임시 로그인 처리
 
@@ -24,7 +24,7 @@ const initialState = {
   checkError: null,
 };
 
-export default handleActions(
+const userReducer = handleActions(
   {
     [TEMP_SET_USER]: (state, { payload: user }) => ({
       ...state,
@@ -43,3 +43,5 @@ export default handleActions(
   },
   initialState
 );
+
+export default userReducer;

@@ -4,8 +4,8 @@ import { takeLatest } from "@redux-saga/core/effects";
 
 import createRequestSaga, {
   createRequestActionTypes,
-} from "../lib/createRequestSaga";
-import * as authAPI from "../lib/api/auth";
+} from "../saga/createRequestSaga";
+import * as authAPI from "../../lib/api/auth";
 
 const CHANGE_FIELD = "auth/CHANGE_FIELD";
 const INITIALIZE_FORM = "auth/INITIALIZE_FORM";
@@ -66,7 +66,7 @@ const initialState = {
   authError: null,
 };
 
-const auth = handleActions(
+const authReducer = handleActions(
   {
     [CHANGE_FIELD]: (state, { payload: { form, key, value } }) =>
       produce(state, (draft) => {
@@ -80,6 +80,7 @@ const auth = handleActions(
     // 회원가입 성공
     [REGISTER_SUCCESS]: (state, { payload: auth }) => ({
       ...state,
+      register: initialState["register"],
       auth: auth,
       authError: null,
     }),
@@ -91,6 +92,7 @@ const auth = handleActions(
     // 로그인 성공
     [LOGIN_SUCCESS]: (state, { payload: auth }) => ({
       ...state,
+      login: initialState["login"],
       authError: null,
       auth,
     }),
@@ -103,4 +105,4 @@ const auth = handleActions(
   initialState
 );
 
-export default auth;
+export default authReducer;

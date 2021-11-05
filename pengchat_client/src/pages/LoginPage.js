@@ -4,8 +4,8 @@ import { Container } from "@material-ui/core";
 import { withRouter } from "react-router-dom";
 
 import "./LoginPage.css";
-import { changeField, initializeForm, login } from "../modules/auth";
-import { check } from "../modules/user";
+import { changeField, initializeForm, login } from "../redux/reducer/authReducer";
+import { check } from "../redux/reducer/userReducer";
 import logoImg from "../assets/animal-kingdom.svg";
 import { CustomTextField, CustomButton } from "../assets/CustomMaterial";
 import { idValidation, pwValidation } from "../modules/Validation";

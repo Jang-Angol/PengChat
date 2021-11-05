@@ -1,9 +1,12 @@
 import React from "react";
 import { Container, Paper, IconButton, Icon } from "@material-ui/core";
 
+import client from "../lib/api/client";
+
 import "./LobbyPage.css";
 
 const LobbyPage = (props) => {
+  console.log(client.defaults.headers["X-AUTH-TOKEN"]);
   /*
   const chatRoomList = props.chatRooms.map((chatRoom) => {
     <chatRoom name={chatRoom.name} number={chatRoom.userCount} max={chatRoom.maxCount} />

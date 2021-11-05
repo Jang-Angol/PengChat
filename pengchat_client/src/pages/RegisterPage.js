@@ -5,7 +5,11 @@ import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 
 import "./RegisterPage.css";
-import { changeField, initializeForm, register } from "../modules/auth";
+import {
+  changeField,
+  initializeForm,
+  register,
+} from "../redux/reducer/authReducer";
 import logoImg from "../assets/animal-kingdom.svg";
 import { CustomTextField, CustomButton } from "../assets/CustomMaterial";
 import {
@@ -66,12 +70,12 @@ const RegisterPage = ({ history }) => {
       console.log(authError);
       setError("Register Failed");
       return;
-    } 
+    }
   }, [history, authError, dispatch]);
 
   useEffect(() => {
     if (auth) {
-      console.log("회원가입 성공")
+      console.log("회원가입 성공");
       history.push("/");
     }
   }, [history, auth, dispatch]);
