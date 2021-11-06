@@ -26,6 +26,7 @@ public class UserController {
     // 회원가입
     @PostMapping("/signup")
     public Long signup(@RequestBody Map<String, String> user) {
+        System.out.println(user);
         return userRepository.save(User.builder()
                 .userId(user.get("peng_id"))
                 .userPw(passwordEncoder.encode(user.get("peng_pw")))

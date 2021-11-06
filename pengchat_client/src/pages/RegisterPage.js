@@ -22,10 +22,10 @@ import ErrorMessage from "../components/ErrorMessage";
 
 const RegisterPage = ({ history }) => {
   const dispatch = useDispatch();
-  const { form, auth, authError } = useSelector(({ auth }) => ({
-    form: auth.register,
-    auth: auth.auth,
-    authError: auth.authError,
+  const { form, auth, authError } = useSelector(({ authReducer }) => ({
+    form: authReducer.register,
+    auth: authReducer.auth,
+    authError: authReducer.authError,
   }));
   const [error, setError] = useState(null);
 

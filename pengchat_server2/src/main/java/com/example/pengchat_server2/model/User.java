@@ -28,7 +28,6 @@ public class User implements UserDetails {
     @Column(nullable = false, unique = true)
     private String userId;
 
-    @Pattern(regexp = "^[\\x00-\\x7F]{8,20}$")
     @Column(nullable = false)
     private String userPw;
 
