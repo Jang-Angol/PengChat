@@ -1,10 +1,10 @@
 import React from "react";
 
-import "./header.css"
+import "./Header.css";
 import logoImg from "../assets/animal-kingdom.svg";
 import userImg from "../assets/user.svg";
 
-const Header = ({ User }) => {
+const Header = ({user}) => {
   return (
     <header className="header">
       <div className="logo">
@@ -13,7 +13,7 @@ const Header = ({ User }) => {
       </div>
       <div className="user">
         <img className="userImg" src={userImg} />
-        <span className="userName">{User.nickname}</span>
+        <span className="userName">{user.peng_name}</span>
         <button className="logout">logout</button>
       </div>
     </header>
