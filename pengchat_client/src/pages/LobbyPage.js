@@ -9,9 +9,10 @@ import "./LobbyPage.css";
 
 const LobbyPage = (props) => {
   const dispatch = useDispatch();
-  const { user } = useSelector(({ userReducer }) => ({
+  /*const { user } = useSelector(({ userReducer }) => ({
     user: userReducer.user,
-  }));
+  }));*/
+  const user = {peng_name:"장인석"};
   console.log(client.defaults.headers["X-AUTH-TOKEN"]);
   /*
   const chatRoomList = props.chatRooms.map((chatRoom) => {
@@ -19,10 +20,12 @@ const LobbyPage = (props) => {
   });
   */
   return (
-    <Container className="container" maxWidth="sm">
+    <div>
       <Header user={user} />
-      testtest
-    </Container>
+      <Container className="container" maxWidth="sm">
+        testtest
+      </Container>
+    </div>
     /*
   <Container className="container" maxWidth="sm">
     <chatRoomList />
