@@ -1,14 +1,21 @@
 import React from "react";
-import { Container } from "@material-ui/core";
+import styled from "styled-components";
 
 import Header from "../components/base/Header";
+
+const WhiteContainer = styled.div`
+  background-color: #ffffff;
+  width: 100%;
+  height: 100%;
+`;
 
 const TestPage = () => {
   const user = { peng_name: "장인석" };
   return (
-    <Container className="contaniner" maxWidth="sm">
+    <div>
       <Header user={user} />
-    </Container>
+      <WhiteContainer>testest</WhiteContainer>
+    </div>
   );
 };
 
