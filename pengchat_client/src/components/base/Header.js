@@ -23,9 +23,7 @@ const Header = ({ user }) => {
           <span className={styles.userName}>{user.peng_name}</span>
         </div>
         <div className={styles.textWrap}>
-          <button className={styles.logout} onClick={alert("blabla")}>
-            logout
-          </button>
+          <button className={styles.logout}>logout</button>
         </div>
       </div>
     </header>
